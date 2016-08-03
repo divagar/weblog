@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['weblog.component.css']
 })
 export class WeblogAppComponent {
-  title = 'weblog works!';
+  title = 'C o m i n g  S o o n';
 }
