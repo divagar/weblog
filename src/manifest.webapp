@@ -1,13 +1,28 @@
 {
+  "version": "1.0.0",
   "name": "Weblog",
-  "icons": [
-    {
-      "src": "icon.png",
-      "sizes": "96x96",
-      "type": "image/png"
-    }
-  ],
+  "launch_path": "index.html",
   "start_url": "/index.html",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "description": "weblog",
+  "icons": {
+    "128": "/images/weblog.png"
+  },
+  "developer": {
+    "name": "Div",
+    "url": "https://github.com/divagar"
+  },
+  "installs_allowed_from": [
+    "*"
+  ],
+  "default_locale": "en",
+  "permissions": {
+  },
+  "locales": {
+    "en": {
+      "name": "Weblog",
+      "description": "weblog"
+    }
+  }
 }
