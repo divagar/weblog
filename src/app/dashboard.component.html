@@ -1,3 +1,38 @@
-<p>
-  Dashboard works!
-</p>
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('images/about_bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Weblog dashboard</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="dashboard row" *ngIf="loginUser.user">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="dashboardLogin btn-group">
+        <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> User</a>
+        <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="javascript:void(0);"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
+          <li class="divider"></li>
+          <li><a (click)='dashboardLogout()'><i class="fa fa-sign-out"></i> Sign Out</a></li>
+        </ul>
+      </div>
+
+      <!-- alert start -->
+      <div class="alert alert-{{dAlertType}} alert-dismissible" *ngIf="dAlert" role="alert">
+        <button type="button" class="close" (click)="closeAlert()"><span aria-hidden="true">&times;</span></button>
+        <strong>{{dAlertType}}: </strong> {{dAlertMsg}}
+      </div>
+      <!-- alert end -->
+    </div>
+  </div>
+</div>
