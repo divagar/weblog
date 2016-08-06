@@ -1,0 +1,36 @@
+.page-heading {
+    padding: 75px 0;
+}
+.intro-header {
+    margin-bottom: 0px;
+}
+
+.login {
+  width: 60%;
+}
+
+@media (min-width: 768px) {
+.login {
+  width: 40%;
+}
+.alert {
+    width: 40%;
+}
+}
+
+.jumbotron {
+    background-color: white;
+}
+.margin-bottom-sm {
+    margin-bottom: 5px !important;
+}
+.btn {
+  float: right;
+  padding: 6px 12px;
+}
+.alert {
+    width: 60%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
