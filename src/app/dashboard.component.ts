@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/RX';
 import { Title } from '@angular/platform-browser';
 
 declare var jQuery: any;
-declare var tinymce: any;
+declare var CKEDITOR: any;
 
 @Component({
     moduleId: module.id,
@@ -63,5 +63,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     closeAlert() {
         this.dAlert = false;
+    }
+
+    loadCKEditor(details: string) {
+      CKEDITOR.replace('ckEditor');
     }
 }

@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-heading">
-          <h1>Weblog dashboard</h1>
+          <h1>Weblog Dashboard</h1>
         </div>
       </div>
     </div>
@@ -14,6 +14,8 @@
 
 <div class="container">
   <div class="dashboard row" *ngIf="loginUser.user">
+
+    <!-- Login info -->
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <div class="dashboardLogin btn-group">
         <a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> User</a>
@@ -26,13 +28,49 @@
           <li><a (click)='dashboardLogout()'><i class="fa fa-sign-out"></i> Sign Out</a></li>
         </ul>
       </div>
-
-      <!-- alert start -->
-      <div class="alert alert-{{dAlertType}} alert-dismissible" *ngIf="dAlert" role="alert">
-        <button type="button" class="close" (click)="closeAlert()"><span aria-hidden="true">&times;</span></button>
-        <strong>{{dAlertType}}: </strong> {{dAlertMsg}}
-      </div>
-      <!-- alert end -->
     </div>
+
+    <!-- Blog details -->
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="dashboardBlog" *ngIf="!selectedBlog || !addNewBlog">
+        <div class="input-group">
+          <span class="input-group-addon">Title</span>
+          <input type="text" class="form-control" #bTitle value="{{ (fbBlogDetails | async)?.bTitle }}">
+        </div>
+        <br/>
+        <div class="input-group">
+          <span class="input-group-addon">Short title</span>
+          <input type="text" class="form-control" #bSTitle value="{{ (fbBlogDetails | async)?.STitle }}">
+        </div>
+        <br/>
+        <div class="input-group">
+          <span class="input-group-addon">Author</span>
+          <input type="text" class="form-control" #bAuthor value="{{ (fbBlogDetails | async)?.Author }}">
+        </div>
+        <br/>
+        <div class="input-group">
+          <span class="input-group-addon">Details</span>
+          <textarea name="ckEditor" id="ckEditor" rows="15" cols="80" #ckEditor>
+                This is my textarea to be replaced with CKEditor.
+                {{ loadCKEditor((fbBlogDetails | async)?.Details) }}
+            </textarea>
+        </div>
+        <br/>
+      </div>
+
+      <button *ngIf="addNewBlog" type="submit" class="btn btn-primary" (click)="addBlog(bTitle.value, bSTitle.value, bAuthor.value, ckEditor.value)">
+                    Add
+                </button>
+      <button *ngIf="selectedBlog" type="submit" class="btn btn-primary" (click)="updateBlog(bTitle.value, bSTitle.value, bAuthor.value, ckEditor.value)">
+                    Update
+                </button>
+    </div>
+
+    <!-- alert start -->
+    <div class="alert alert-{{dAlertType}} alert-dismissible" *ngIf="dAlert" role="alert">
+      <button type="button" class="close" (click)="closeAlert()"><span aria-hidden="true">&times;</span></button>
+      <strong>{{dAlertType}}: </strong> {{dAlertMsg}}
+    </div>
+    <!-- alert end -->
   </div>
 </div>
