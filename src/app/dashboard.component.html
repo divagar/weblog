@@ -49,8 +49,7 @@
         </div>
         <br/>
         <div class="input-group">
-          <span class="input-group-addon">Details</span>
-          <textarea name="ckEditor" id="ckEditor" rows="15" cols="80" #ckEditor>
+          <textarea name="ckEditor" id="ckEditor" rows="25" cols="80" #ckEditor>
                 This is my textarea to be replaced with CKEditor.
                 {{ loadCKEditor((fbBlogDetails | async)?.Details) }}
             </textarea>
