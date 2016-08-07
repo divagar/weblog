@@ -15,19 +15,19 @@
 </header>
 
 <!-- Main Content -->
-<div class="container">
+<div class="container" *ngIf="fbBlogs">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-preview">
+            <div class="post-preview" *ngFor="let blogs of fbBlogs | async">
                 <a href="#">
                     <h2 class="post-title">
-                        Build a simple modern personal blogging site.
+                        {{blogs.Title}}
                     </h2>
                     <h3 class="post-subtitle">
-                        Using Angular2 and firebase.
+                        {{blogs.STitle}}
                     </h3>
                 </a>
-                <p class="post-meta">Posted by <a href="#">Divagar M</a> on January 07, 2016</p>
+                <p class="post-meta">Posted by <a href="javascript:void(0);">{{blogs.Author}}</a> on {{blogs.PublishDate}}</p>
             </div>
             <hr>
             <!-- Pager -->
