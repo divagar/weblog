@@ -8,6 +8,9 @@
 .login {
     width: 50%;
 }
+.alert {
+    width: 50%;
+}
 
 @media (min-width: 768px) {
 .login {

@@ -9,7 +9,9 @@ div.dashboardBlog {
     margin-top: 50px;
 }
 div.alert {
-    margin-top: 10px;
+    margin-top: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 div.dashboardControl {
     float: right;

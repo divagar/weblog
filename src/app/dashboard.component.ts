@@ -18,6 +18,10 @@ declare var CKEDITOR: any;
 
 export class DashboardComponent implements OnInit, AfterViewInit {
 
+  fbBlogs: Observable<any[]>;
+  fbBlogDetails: FirebaseObjectObservable<any>;
+  fbNewBlog: FirebaseListObservable<any>;
+
   dAlert: boolean;
   dAlertMsg: string;
   dAlertType: string;
@@ -72,20 +76,44 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   newBlog() {
-    console.log('Add new blog!');
     this.addNewBlogFlag = true;
     this.editBlogFlag = false;
   }
   editBlog() {
-    console.log('Edit blog!');
     this.editBlogFlag = true;
     this.addNewBlogFlag = false;
   }
 
-  dashboardalert(type, msg, status) {
+  addBlog(bTitle: string, bSTitle: string, bAuthor: string) {
+    console.log("Add Blog!");
+    var data: Object;
+    var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
+    var date = new Date();
+    data = {
+      'Title': bTitle,
+      'STitle': bSTitle,
+      'Author': bAuthor,
+      'Content': ckEditorContent,
+      'PublishDate': date.toString()
+    }
+    console.log(data);
+
+    var query: string = '/Blogs';
+    console.log(query);
+    this.dashboardAlert('info', 'Processing.', true);
+    this.fbNewBlog = this.af.database.list(query);
+    const promise = this.fbNewBlog.push(data);
+    promise
+      .then(_ => this.dashboardAlert('success', 'New blog added successfully.', true))
+      .catch(err => this.dashboardAlert('warning', 'Error occurred while addding a blog.', true));
+  }
+
+  dashboardAlert(type, msg, status) {
     this.dAlertType = type;
     this.dAlertMsg = msg;
     this.dAlert = status;
+    this.addNewBlogFlag = false;
+    this.editBlogFlag = false;
   }
 
   closeAlert() {
