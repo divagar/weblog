@@ -6,15 +6,15 @@
 }
 
 .login {
-  width: 60%;
+    width: 50%;
 }
 
 @media (min-width: 768px) {
 .login {
-  width: 40%;
+    width: 30%;
 }
 .alert {
-    width: 40%;
+    width: 30%;
 }
 }
 
@@ -24,9 +24,14 @@
 .margin-bottom-sm {
     margin-bottom: 5px !important;
 }
+.input-group-addon {
+    background: white;
+}
 .btn {
-  float: right;
-  padding: 6px 12px;
+    float: right;
+    padding: 6px 12px;
+    background: white;
+    border: 1px solid #eee;
 }
 .alert {
     width: 60%;

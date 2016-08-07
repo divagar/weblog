@@ -9,63 +9,86 @@ declare var jQuery: any;
 declare var CKEDITOR: any;
 
 @Component({
-    moduleId: module.id,
-    selector: 'dashboard',
-    templateUrl: 'dashboard.component.html',
-    styleUrls: ['dashboard.component.css'],
-    providers: [LoginComponent]
+  moduleId: module.id,
+  selector: 'dashboard',
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.css'],
+  providers: [LoginComponent]
 })
 
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-    dAlert: boolean;
-    dAlertMsg: string;
-    dAlertType: string;
+  dAlert: boolean;
+  dAlertMsg: string;
+  dAlertType: string;
 
-    constructor(public af: AngularFire,
-        public loginUser: LoginComponent,
-        public router: Router,
-        private titleService: Title) {
+  timerCkeditor: any;
 
-        //Set page title
-        this.titleService.setTitle("Weblog | Dashboard");
+  addNewBlogFlag: boolean;
+  editBlogFlag: boolean;
 
-        //get af auth status
-        af.auth
-            .do(v => this.dashboardLogin(v))
-            .subscribe(user => this.dashboardLogin(user))
+  constructor(public af: AngularFire,
+    public loginUser: LoginComponent,
+    public router: Router,
+    private titleService: Title) {
+
+    //Set page title
+    this.titleService.setTitle("Weblog | Dashboard");
+
+    //get af auth status
+    af.auth
+      .do(v => this.dashboardLogin(v))
+      .subscribe(user => this.dashboardLogin(user))
+  }
+
+  ngOnInit() { }
+
+  ngAfterViewInit() { }
+
+  dashboardLogin(user) {
+    //check user credentials
+    this.loginUser.userCredentials(user);
+    if (this.loginUser.user == null)
+      this.router.navigate(['/login']);
+    //else
+    //selectCategory
+    //this.getCategory();
+  }
+
+  loadCKEditor(details: string) {
+    clearTimeout(this.timerCkeditor);
+    if (CKEDITOR.instances['ckEditor'] == undefined) {
+      this.timerCkeditor = setTimeout(() => this.setCKEditorContent(details), 1000);
     }
+  }
 
-    ngOnInit() {}
-
-    ngAfterViewInit() {}
-
-    dashboardLogin(user) {
-        //check user credentials
-        this.loginUser.userCredentials(user);
-        if (this.loginUser.user == null)
-            this.router.navigate(['/login']);
-        //else
-            //selectCategory
-            //this.getCategory();
-    }
-
-    dashboardLogout() {
-        this.loginUser.logoutUser();
-    }
-
-
-    dashboardalert(type, msg, status) {
-        this.dAlertType = type;
-        this.dAlertMsg = msg;
-        this.dAlert = status;
-    }
-
-    closeAlert() {
-        this.dAlert = false;
-    }
-
-    loadCKEditor(details: string) {
+  setCKEditorContent(details: string) {
+    if (CKEDITOR.instances['ckEditor'] == undefined)
       CKEDITOR.replace('ckEditor');
-    }
+  }
+
+  dashboardLogout() {
+    this.loginUser.logoutUser();
+  }
+
+  newBlog() {
+    console.log('Add new blog!');
+    this.addNewBlogFlag = true;
+    this.editBlogFlag = false;
+  }
+  editBlog() {
+    console.log('Edit blog!');
+    this.editBlogFlag = true;
+    this.addNewBlogFlag = false;
+  }
+
+  dashboardalert(type, msg, status) {
+    this.dAlertType = type;
+    this.dAlertMsg = msg;
+    this.dAlert = status;
+  }
+
+  closeAlert() {
+    this.dAlert = false;
+  }
 }
