@@ -18,16 +18,16 @@
 <div class="container" *ngIf="fbBlogs">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="post-preview" *ngFor="let blogs of fbBlogs | async">
+            <div class="post-preview" *ngFor="let blog of fbBlogs | async">
                 <a href="#">
                     <h2 class="post-title">
-                        {{blogs.Title}}
+                        {{blog.Title}}
                     </h2>
                     <h3 class="post-subtitle">
-                        {{blogs.STitle}}
+                        {{blog.STitle}}
                     </h3>
                 </a>
-                <p class="post-meta">Posted by <a href="javascript:void(0);">{{blogs.Author}}</a> on {{blogs.PublishDate}}</p>
+                <p class="post-meta">Posted by <a href="javascript:void(0);">{{blog.Author}}</a> on {{blog.PublishDate}}</p>
             </div>
             <hr>
             <!-- Pager -->

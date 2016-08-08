@@ -23,8 +23,18 @@
           <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
         </a>
         <ul class="dropdown-menu">
+          <!-- new blog -->
           <li><a (click)='newBlog()'><i class="fa fa-plus fa-fw"></i> New Blog</a></li>
-          <li><a (click)='editBlog()'><i class="fa fa-pencil fa-fw"></i> Edit Blog</a></li>
+          <!-- edit blog -->
+          <li class="dropdown-submenu" *ngIf="fbBlogs">
+            <a href="javascript:void(0);"><i class="fa fa-pencil fa-fw"></i> Edit Blog</a>
+            <ul class="dropdown-menu">
+              <li *ngFor="let blog of fbBlogs | async">
+                <a tabindex="-1" (click)='editBlog(blog.$key)'>{{blog.Title}}</a>
+              </li>
+            </ul>
+          </li>
+          <!-- sign out -->
           <li class="divider"></li>
           <li><a (click)='dashboardLogout()'><i class="fa fa-sign-out"></i> Sign Out</a></li>
         </ul>
@@ -51,7 +61,6 @@
         <br/>
         <div class="input-group">
           <textarea name="ckEditor" id="ckEditor" rows="25" cols="80" #ckEditor>
-                This is my textarea to be replaced with CKEditor.
                 {{ loadCKEditor((fbBlogDetails | async)?.Content) }}
             </textarea>
         </div>

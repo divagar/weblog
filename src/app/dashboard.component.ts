@@ -54,9 +54,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.loginUser.userCredentials(user);
     if (this.loginUser.user == null)
       this.router.navigate(['/login']);
-    //else
-    //selectCategory
-    //this.getCategory();
+    else
+      //Get Blogs
+      this.getBlogs();
   }
 
   loadCKEditor(details: string) {
@@ -65,10 +65,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.timerCkeditor = setTimeout(() => this.setCKEditorContent(details), 1000);
     }
   }
-
   setCKEditorContent(details: string) {
-    if (CKEDITOR.instances['ckEditor'] == undefined)
-      CKEDITOR.replace('ckEditor');
+    CKEDITOR.replace('ckEditor');
+    CKEDITOR.instances.ckEditor.setData(details);
   }
 
   dashboardLogout() {
@@ -78,10 +77,40 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   newBlog() {
     this.addNewBlogFlag = true;
     this.editBlogFlag = false;
+    this.fbBlogDetails = null;
+
+    //ckEditor cleanup
+    if (CKEDITOR.instances.ckEditor != undefined) {
+      CKEDITOR.instances.ckEditor.setData("");
+    }
   }
-  editBlog() {
+  editBlog(blogKey) {
     this.editBlogFlag = true;
     this.addNewBlogFlag = false;
+
+    //ckEditor cleanup
+    if (CKEDITOR.instances.ckEditor != undefined) {
+      CKEDITOR.instances.ckEditor.destroy();
+    }
+
+    //get blog details
+    this.getBlogDetails(blogKey);
+  }
+
+  getBlogs() {
+    var query: string = '/Blogs';
+    console.log(query);
+    this.fbBlogs = this.af.database.list(query, {}).map((_blogs) => {
+      return _blogs.map((_blog) => {
+        return _blog;
+      })
+    });
+  }
+
+  getBlogDetails(key: string) {
+    var query: string = '/Blogs/' + key;
+    console.log(query);
+    this.fbBlogDetails = this.af.database.object(query);
   }
 
   addBlog(bTitle: string, bSTitle: string, bAuthor: string) {
@@ -96,8 +125,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       'Content': ckEditorContent,
       'PublishDate': date.toString()
     }
-    console.log(data);
-
+    //console.log(data);
     var query: string = '/Blogs';
     console.log(query);
     this.dashboardAlert('info', 'Processing.', true);
@@ -105,7 +133,29 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     const promise = this.fbNewBlog.push(data);
     promise
       .then(_ => this.dashboardAlert('success', 'New blog added successfully.', true))
-      .catch(err => this.dashboardAlert('warning', 'Error occurred while addding a blog.', true));
+      .catch(err => this.dashboardAlert('warning', 'Error occurred while addding blog.', true));
+  }
+
+  updateBlog(bTitle: string, bSTitle: string, bAuthor: string) {
+    console.log("Update Blog!");
+    var data: Object;
+    var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
+    var date = new Date();
+    data = {
+      'Title': bTitle,
+      'STitle': bSTitle,
+      'Author': bAuthor,
+      'Content': ckEditorContent,
+      'PublishDate': date.toString()
+    }
+    //console.log(data);
+    var query: string = '/Blogs';
+    console.log(query);
+    this.dashboardAlert('info', 'Processing.', true);
+    const promise = this.fbBlogDetails.update(data);
+    promise
+      .then(_ => this.dashboardAlert('success', 'Blog updated successfully.', true))
+      .catch(err => this.dashboardAlert('warning', 'Error occurred while updating blog.', true));
   }
 
   dashboardAlert(type, msg, status) {
