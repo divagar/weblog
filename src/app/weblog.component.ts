@@ -47,10 +47,7 @@ import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/ro
 
 export class WeblogAppComponent implements OnInit {
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
-  title = 'W e l c o m e';
+  ngOnInit() {}
 }

@@ -12,15 +12,19 @@ import {
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { Title } from '@angular/platform-browser';
+import { HomeComponent } from './home.component';
 
 @Component({
   moduleId: module.id,
   selector: 'login',
   templateUrl: 'login.component.html',
-  styleUrls: ['login.component.css']
+  styleUrls: ['login.component.css'],
+  providers: [HomeComponent]
 })
 
 export class LoginComponent {
+
+  pageTitle: string = "Login";
 
   loginAlert: boolean;
   loginAlertMsg: string;
@@ -31,10 +35,11 @@ export class LoginComponent {
   constructor(
     public af: AngularFire,
     public router: Router,
+    private home: HomeComponent,
     private titleService: Title) {
 
     //Set page title
-    this.titleService.setTitle("Weblog | Login");
+    this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);
 
     //get af auth status
     af.auth

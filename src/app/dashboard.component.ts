@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { HomeComponent } from './home.component';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
 import { Title } from '@angular/platform-browser';
@@ -13,10 +14,12 @@ declare var CKEDITOR: any;
   selector: 'dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
-  providers: [LoginComponent]
+  providers: [LoginComponent, HomeComponent]
 })
 
 export class DashboardComponent implements OnInit, AfterViewInit {
+
+  pageTitle: string = "Dashboard";
 
   fbBlogs: Observable<any[]>;
   fbBlogDetails: FirebaseObjectObservable<any>;
@@ -31,13 +34,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   addNewBlogFlag: boolean;
   editBlogFlag: boolean;
 
-  constructor(public af: AngularFire,
+  constructor(
+    private home: HomeComponent,
+    public af: AngularFire,
     public loginUser: LoginComponent,
     public router: Router,
     private titleService: Title) {
 
     //Set page title
-    this.titleService.setTitle("Weblog | Dashboard");
+    this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);
 
     //get af auth status
     af.auth

@@ -14,7 +14,8 @@ import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  appTitle: string = "weblog";
+  pageTitle: string = "Home";
   fbBlogs: Observable<any[]>;
 
   public constructor(
@@ -22,13 +23,13 @@ export class HomeComponent implements OnInit {
                   private titleService: Title) {
 
     //Set page title
-    this.titleService.setTitle("Weblog | Home");
+    this.titleService.setTitle(this.appTitle + " | " + this.pageTitle);
 
     //Get Blogs
     this.getBlogs();
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   getBlogs() {
     var query: string = '/Blogs';
