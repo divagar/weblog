@@ -25,8 +25,8 @@ import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/ro
   {
     path: '/post', component: PostComponent
   },
-  {
-    path: '/post/*', component: PostComponent
+  { 
+    path: 'post/:id', component: PostComponent
   },
   {
     path: '/about', component: AboutComponent
@@ -47,7 +47,7 @@ import { Routes, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/ro
 
 export class WeblogAppComponent implements OnInit {
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

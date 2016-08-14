@@ -11,10 +11,11 @@ import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
   moduleId: module.id,
   selector: 'home',
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css']
+  styleUrls: ['home.component.css'],
+  directives: [ROUTER_DIRECTIVES]
 })
 export class HomeComponent implements OnInit {
-  appTitle: string = "weblog";
+  appTitle: string = "Weblog";
   pageTitle: string = "Home";
   fbBlogs: Observable<any[]>;
 
@@ -39,6 +40,11 @@ export class HomeComponent implements OnInit {
         return _blog;
       })
     });
+  }
+
+  blogUrlEncode(str: String) {
+    var ret: string = str.replace("[^a-zA-Z0-9//g]" , "-");
+    return ret;
   }
 
 }
