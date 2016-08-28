@@ -13,11 +13,22 @@ const weblogRoutes: Routes = [
   {
     path: 'dashboard', component: DashboardComponent
   },
+  // {
+  //   path: 'post', component: PostComponent
+  // },
   {
-    path: 'post', component: PostComponent
-  },
-  { 
-    path: 'post/...', component: PostComponent
+    path: 'post',
+        children: [
+            {
+                path: ':id',
+                children: [
+                    {
+                        path: '**',
+                        component: PostComponent,
+                    }
+                ]
+            }
+        ]
   },
   {
     path: 'about', component: AboutComponent
@@ -32,7 +43,7 @@ const weblogRoutes: Routes = [
     path: '', component: HomeComponent
   },
   {
-    path: '*', component: HomeComponent
+    path: '**', component: HomeComponent
   }
 ];
 

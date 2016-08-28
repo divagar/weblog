@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { Title } from '@angular/platform-browser';
-import { Routes, Router } from '@angular/router';
+import { Routes, ActivatedRoute } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
@@ -18,19 +18,23 @@ export class PostComponent implements OnInit {
   fbBlogDetails: FirebaseObjectObservable<any>;
 
   constructor(
-    private home: HomeComponent,
     public af: AngularFire,
-    //public params: RouteSegment,
+    private home: HomeComponent,
+    private route: ActivatedRoute,
     private titleService: Title) {
 
     //Set page title
     this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);
 
     //Get params
-    //console.log(this.params);
+    route.params.subscribe(
+      params => {
+        this.selectedBlogId = params['id'];
+      }
+    );
 
     //Get Blog Details
-
+    this.getBlogDetails();
   }
 
   ngOnInit() { }

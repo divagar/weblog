@@ -18,17 +18,17 @@ export class HomeComponent implements OnInit {
   fbBlogs: Observable<any[]>;
 
   public constructor(
-                  public af: AngularFire,
-                  private titleService: Title) {
+    public af: AngularFire,
+    private titleService: Title) {
 
     //Set page title
     this.titleService.setTitle(this.appTitle + " | " + this.pageTitle);
+  }
 
+  ngOnInit() {
     //Get Blogs
     this.getBlogs();
   }
-
-  ngOnInit() {}
 
   getBlogs() {
     var query: string = '/Blogs';
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   blogUrlEncode(str: String) {
-    var ret: string = str.replace("[^a-zA-Z0-9//g]" , "-");
+    var ret: string = str.replace("[^a-zA-Z0-9//g]", "-");
     return ret;
   }
 
