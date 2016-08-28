@@ -7,23 +7,23 @@
                     <span class="sr-only">Toggle navigation</span>
                     Menu <i class="fa fa-bars"></i>
                 </button>
-      <a class="navbar-brand" [routerLink]="['/home']" id="index">Weblog</a>
+      <a class="navbar-brand" routerLink="/" id="index">Weblog</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a [routerLink]="['/home']" id="home">Home</a>
+          <a routerLink="/home" id="home">Home</a>
         </li>
         <li>
-          <a [routerLink]="['/about']" id="about">About</a>
+          <a routerLink="/about" id="about">About</a>
         </li>
         <li>
-          <a [routerLink]="['/post']" id="post">Post</a>
+          <a routerLink="/post" id="post">Post</a>
         </li>
         <li>
-          <a [routerLink]="['/contact']" id="contact">Contact</a>
+          <a routerLink="/contact" id="contact">Contact</a>
         </li>
       </ul>
     </div>

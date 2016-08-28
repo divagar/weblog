@@ -1,5 +1,4 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { DomSanitizationService } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
@@ -11,8 +10,7 @@ import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
   moduleId: module.id,
   selector: 'home',
   templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
-  directives: [ROUTER_DIRECTIVES]
+  styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
   appTitle: string = "Weblog";

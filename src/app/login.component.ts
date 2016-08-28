@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
 import {
   AuthMethods,
   AuthProviders,

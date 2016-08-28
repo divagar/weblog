@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { Title } from '@angular/platform-browser';
-import { Routes, Router, RouteSegment, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
@@ -21,14 +21,14 @@ export class PostComponent implements OnInit {
   constructor(
     private home: HomeComponent,
     public af: AngularFire,
-    public params: RouteSegment,
+    //public params: RouteSegment,
     private titleService: Title) {
 
     //Set page title
     this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);
 
     //Get params
-    console.log(this.params);
+    //console.log(this.params);
 
     //Get Blog Details
 
