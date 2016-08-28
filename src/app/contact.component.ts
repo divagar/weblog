@@ -6,8 +6,7 @@ import { Title } from '@angular/platform-browser';
     moduleId: module.id,
     selector: 'contact',
     templateUrl: 'contact.component.html',
-    styleUrls: ['contact.component.css'],
-    providers: [HomeComponent]
+    styleUrls: ['contact.component.css']
 })
 export class ContactComponent implements OnInit {
 

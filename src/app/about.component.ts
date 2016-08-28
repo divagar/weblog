@@ -6,8 +6,7 @@ import { Title } from '@angular/platform-browser';
     moduleId: module.id,
     selector: 'about',
     templateUrl: 'about.component.html',
-    styleUrls: ['about.component.css'],
-    providers: [HomeComponent]
+    styleUrls: ['about.component.css']
 })
 export class AboutComponent implements OnInit {
 

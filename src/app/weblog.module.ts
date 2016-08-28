@@ -28,6 +28,7 @@ export const firebaseConfig = {
     ],
     providers: [
         weblogRoutingProviders,
+        HomeComponent,
         Title
     ],
     declarations: [

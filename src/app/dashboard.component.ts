@@ -14,7 +14,7 @@ declare var CKEDITOR: any;
   selector: 'dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
-  providers: [LoginComponent, HomeComponent]
+  providers: [LoginComponent]
 })
 
 export class DashboardComponent implements OnInit, AfterViewInit {

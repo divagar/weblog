@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { Title } from '@angular/platform-browser';
-import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
   moduleId: module.id,
   selector: 'post',
   templateUrl: 'post.component.html',
-  styleUrls: ['post.component.css'],
-  providers: [HomeComponent]
+  styleUrls: ['post.component.css']
 })
 
 export class PostComponent implements OnInit {
