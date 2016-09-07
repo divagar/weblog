@@ -41,8 +41,7 @@ export class HomeComponent implements OnInit {
   }
 
   blogUrlEncode(str: String) {
-    var ret: string = str.replace("[^a-zA-Z0-9//g]", "-");
-    return ret;
+    return str.replace(/[^a-zA-Z0-9]/g, "-");
   }
 
 }
