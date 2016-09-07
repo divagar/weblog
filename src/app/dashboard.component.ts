@@ -9,6 +9,10 @@ import { Title } from '@angular/platform-browser';
 declare var jQuery: any;
 declare var CKEDITOR: any;
 
+var monthNames = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 @Component({
   moduleId: module.id,
   selector: 'dashboard',
@@ -123,12 +127,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     var data: Object;
     var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
     var date = new Date();
+    var fDate = date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
     data = {
       'Title': bTitle,
       'STitle': bSTitle,
       'Author': bAuthor,
       'Content': ckEditorContent,
-      'PublishDate': date.toString()
+      'PublishDate': fDate
     }
     //console.log(data);
     var query: string = '/Blogs';
@@ -146,12 +151,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     var data: Object;
     var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
     var date = new Date();
+    var fDate = date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
     data = {
       'Title': bTitle,
       'STitle': bSTitle,
       'Author': bAuthor,
       'Content': ckEditorContent,
-      'PublishDate': date.toString()
+      'PublishDate': fDate
     }
     //console.log(data);
     var query: string = '/Blogs';
