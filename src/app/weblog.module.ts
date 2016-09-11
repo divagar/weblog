@@ -1,6 +1,6 @@
 import { NgModule }     from '@angular/core';
 import { BrowserModule, Title }        from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { AngularFireModule }    from 'angularfire2';
 import { WeblogAppComponent }   from './weblog.component';
 import { routing, weblogRoutingProviders }  from './weblog.routing';
@@ -23,6 +23,7 @@ export const firebaseConfig = {
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         routing,
         AngularFireModule.initializeApp(firebaseConfig)
     ],

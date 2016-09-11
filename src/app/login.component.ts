@@ -13,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { Title } from '@angular/platform-browser';
 import { HomeComponent } from './home.component';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
@@ -31,11 +32,14 @@ export class LoginComponent {
 
   user: FirebaseAuthState;
 
+  loginForm: FormGroup;
+
   constructor(
     public af: AngularFire,
     public router: Router,
     private home: HomeComponent,
-    private titleService: Title) {
+    private titleService: Title,
+    private formBuilder: FormBuilder) {
 
     //Set page title
     this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);
@@ -44,10 +48,18 @@ export class LoginComponent {
     af.auth
       .do(v => this.userCredentials(v))
       .subscribe(user => this.userCredentials(user))
+
+    //login form
+    this.loginForm = formBuilder.group({
+      username: formBuilder.control(null),
+      password: formBuilder.control(null)
+    });
   }
 
   /* login user */
-  loginUser(email: string, password: string) {
+  loginUser() {
+    var email: string = this.loginForm.value.username;
+    var password: string = this.loginForm.value.password;
     this.af.auth.login({ email, password }, {
       method: AuthMethods.Password,
       provider: AuthProviders.Password

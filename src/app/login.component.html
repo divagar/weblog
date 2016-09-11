@@ -12,20 +12,22 @@
   </div>
 </header>
 
-<div class="login jumbotron center-block">
-  <div class="input-group margin-bottom-sm">
-    <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-    <input class="form-control" type="text" #username id="username" placeholder="Username">
-  </div>
-  <div class="input-group margin-bottom-sm">
-    <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-    <input class="form-control" type="password" #password id="password" placeholder="Password">
-  </div>
-  <button type="submit" class="btn" (click)="loginUser(username.value, password.value)">
+<form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+  <div class="login jumbotron center-block">
+    <div class="input-group margin-bottom-sm">
+      <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+      <input class="form-control" type="text" #username id="username" required placeholder="Username" formControlName="username">
+    </div>
+    <div class="input-group margin-bottom-sm">
+      <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+      <input class="form-control" type="password" #password id="password" required placeholder="Password" formControlName="password">
+    </div>
+    <button type="submit" class="btn">
     <i class="fa fa-user" aria-hidden="true"></i>
     Submit
     </button>
-</div>
+  </div>
+</form>
 
 <!-- alert start -->
 <div class="alert alert-{{loginAlertType}} alert-dismissible" *ngIf="loginAlert" role="alert">
