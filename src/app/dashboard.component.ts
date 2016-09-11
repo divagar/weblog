@@ -5,6 +5,7 @@ import { HomeComponent } from './home.component';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
 import { Title } from '@angular/platform-browser';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 declare var jQuery: any;
 declare var CKEDITOR: any;
@@ -38,12 +39,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   addNewBlogFlag: boolean;
   editBlogFlag: boolean;
 
+  dashboardForm: FormGroup;
+
   constructor(
     private home: HomeComponent,
     public af: AngularFire,
     public loginUser: LoginComponent,
     public router: Router,
-    private titleService: Title) {
+    private titleService: Title,
+    private formBuilder: FormBuilder) {
 
     //Set page title
     this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);
@@ -52,6 +56,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     af.auth
       .do(v => this.dashboardLogin(v))
       .subscribe(user => this.dashboardLogin(user))
+
+    //dashboard form
+    this.dashboardForm = formBuilder.group({
+      Title: formBuilder.control(null),
+      STitle: formBuilder.control(null),
+      Author: formBuilder.control(null),
+      Content: formBuilder.control(null)
+    });
   }
 
   ngOnInit() { }
@@ -122,16 +134,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.fbBlogDetails = this.af.database.object(query);
   }
 
-  addBlog(bTitle: string, bSTitle: string, bAuthor: string) {
-    console.log("Add Blog!");
+  addupdateBlog(blogFlag) {
     var data: Object;
     var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
     var date = new Date();
     var fDate = date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
     data = {
-      'Title': bTitle,
-      'STitle': bSTitle,
-      'Author': bAuthor,
+      'Title': this.dashboardForm.value.Title,
+      'STitle': this.dashboardForm.value.STitle,
+      'Author': this.dashboardForm.value.Author,
       'Content': ckEditorContent,
       'PublishDate': fDate
     }
@@ -139,34 +150,21 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     var query: string = '/Blogs';
     console.log(query);
     this.dashboardAlert('info', 'Processing.', true);
-    this.fbNewBlog = this.af.database.list(query);
-    const promise = this.fbNewBlog.push(data);
-    promise
-      .then(_ => this.dashboardAlert('success', 'New blog added successfully.', true))
-      .catch(err => this.dashboardAlert('warning', 'Error occurred while addding blog.', true));
-  }
-
-  updateBlog(bTitle: string, bSTitle: string, bAuthor: string) {
-    console.log("Update Blog!");
-    var data: Object;
-    var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
-    var date = new Date();
-    var fDate = date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
-    data = {
-      'Title': bTitle,
-      'STitle': bSTitle,
-      'Author': bAuthor,
-      'Content': ckEditorContent,
-      'PublishDate': fDate
+    if (blogFlag) {
+      console.log("Add Blog!");
+      this.fbNewBlog = this.af.database.list(query);
+      const promise = this.fbNewBlog.push(data);
+      promise
+        .then(_ => this.dashboardAlert('success', 'New blog added successfully.', true))
+        .catch(err => this.dashboardAlert('warning', 'Error occurred while addding blog.', true));
     }
-    //console.log(data);
-    var query: string = '/Blogs';
-    console.log(query);
-    this.dashboardAlert('info', 'Processing.', true);
-    const promise = this.fbBlogDetails.update(data);
-    promise
-      .then(_ => this.dashboardAlert('success', 'Blog updated successfully.', true))
-      .catch(err => this.dashboardAlert('warning', 'Error occurred while updating blog.', true));
+    else {
+      console.log("Update Blog!");
+      const promise = this.fbBlogDetails.update(data);
+      promise
+        .then(_ => this.dashboardAlert('success', 'Blog updated successfully.', true))
+        .catch(err => this.dashboardAlert('warning', 'Error occurred while updating blog.', true));
+    }
   }
 
   dashboardAlert(type, msg, status) {
