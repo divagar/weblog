@@ -40,6 +40,8 @@ export class PostComponent implements OnInit {
 
   ngOnInit() { }
 
+  ngAfterViewInit() { }
+
   getBlogDetails() {
     var query: string = '/Blogs/' + this.selectedBlogId;
     console.log(query);

@@ -5,7 +5,7 @@ import { HomeComponent } from './home.component';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
 import { Title } from '@angular/platform-browser';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 declare var jQuery: any;
 declare var CKEDITOR: any;
@@ -59,10 +59,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
     //dashboard form
     this.dashboardForm = formBuilder.group({
-      Title: formBuilder.control(null),
-      STitle: formBuilder.control(null),
-      Author: formBuilder.control(null),
-      Content: formBuilder.control(null)
+      'Title': new FormControl("", Validators.required),
+      'STitle': new FormControl("", Validators.required),
+      'Author': new FormControl("", Validators.required),
+      'Content': new FormControl("", Validators.required)
     });
   }
 
@@ -134,7 +134,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.fbBlogDetails = this.af.database.object(query);
   }
 
-  addupdateBlog(blogFlag) {
+  addupdateBlog(blogFlag: boolean) {
     var data: Object;
     var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
     var date = new Date();
@@ -146,6 +146,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       'Content': ckEditorContent,
       'PublishDate': fDate
     }
+    //console.log(this.dashboardForm.value);
     //console.log(data);
     var query: string = '/Blogs';
     console.log(query);
