@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { LoginComponent } from './login.component';
 import { Observable } from 'rxjs/RX';
+import { map } from 'rxjs/operator/map';
 import { Title } from '@angular/platform-browser';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
@@ -15,7 +16,6 @@ var monthNames = ["January", "February", "March", "April", "May", "June",
 ];
 
 @Component({
-  moduleId: module.id,
   selector: 'dashboard',
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.css'],
@@ -121,7 +121,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   getBlogs() {
     var query: string = '/Blogs';
     console.log(query);
-    this.fbBlogs = this.af.database.list(query, {}).map((_blogs) => {
+    this.fbBlogs = map.call(this.af.database.list(query, {}), (_blogs: any[]) => {
       return _blogs.map((_blog) => {
         return _blog;
       })

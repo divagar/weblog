@@ -1,13 +1,12 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { DomSanitizationService } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operator/map';
 import { Subject } from 'rxjs/Subject';
 import { Title } from '@angular/platform-browser';
 import { getDOM } from '@angular/platform-browser/src/dom/dom_adapter';
 
 @Component({
-  moduleId: module.id,
   selector: 'home',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css']
@@ -33,7 +32,7 @@ export class HomeComponent implements OnInit {
   getBlogs() {
     var query: string = '/Blogs';
     console.log(query);
-    this.fbBlogs = this.af.database.list(query, {}).map((_blogs) => {
+    this.fbBlogs = map.call(this.af.database.list(query, {}), (_blogs: any[]) => {
       return _blogs.map((_blog) => {
         return _blog;
       })

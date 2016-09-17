@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Routes, Router } from '@angular/router';
 import {
   AuthMethods,
   AuthProviders,
@@ -16,7 +16,6 @@ import { HomeComponent } from './home.component';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
-  moduleId: module.id,
   selector: 'login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css']

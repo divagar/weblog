@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeComponent } from './home.component';
-import { Title, DomSanitizationService } from '@angular/platform-browser';
+import { Title, DomSanitizer } from '@angular/platform-browser';
 import { Routes, ActivatedRoute } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
-  moduleId: module.id,
   selector: 'post',
   templateUrl: 'post.component.html',
   styleUrls: ['post.component.css']
@@ -22,7 +21,7 @@ export class PostComponent implements OnInit {
     private home: HomeComponent,
     private route: ActivatedRoute,
     private titleService: Title,
-    public sanitizer: DomSanitizationService) {
+    public sanitizer: DomSanitizer ) {
 
     //Set page title
     this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);

@@ -3,7 +3,6 @@ import { HomeComponent } from './home.component';
 import { Title } from '@angular/platform-browser';
 
 @Component ({
-    moduleId: module.id,
     selector: 'contact',
     templateUrl: 'contact.component.html',
     styleUrls: ['contact.component.css']
