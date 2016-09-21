@@ -5,20 +5,22 @@
     margin-bottom: 0px;
 }
 
-.login {
-    width: 50%;
-}
-.alert {
-    width: 50%;
+@media (min-width: 768px) {
+    .login {
+        width: 50% !important;
+    }
+    .alert {
+        width: 50% !important;
+    }
 }
 
-@media (min-width: 768px) {
-.login {
-    width: 30%;
-}
-.alert {
-    width: 30%;
-}
+@media (min-width: 960px) {
+    .login {
+        width: 40% !important;
+    }
+    .alert {
+        width: 40% !important;
+    }
 }
 
 .jumbotron {
@@ -41,6 +43,10 @@
     text-align: center;
     margin-right: auto;
     margin-left: auto;
+    font-size: 16px;
+}
+.login {
+    width: 60%;
 }
 
 .ng-valid[required], .ng-valid.required  {
