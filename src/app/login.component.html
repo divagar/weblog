@@ -16,13 +16,13 @@
   <div class="login jumbotron center-block">
     <div class="input-group margin-bottom-sm">
       <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-      <input class="form-control" type="text" #username id="username" required placeholder="Username" formControlName="username">
+      <input class="form-control" type="text" #username placeholder="Username" formControlName="username">
     </div>
     <div class="input-group margin-bottom-sm">
       <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-      <input class="form-control" type="password" #password id="password" required placeholder="Password" formControlName="password">
+      <input class="form-control" type="password" #password placeholder="Password" formControlName="password">
     </div>
-    <button type="submit" class="btn">
+    <button type="submit" class="btn" [disabled]="!loginForm.valid">
     <i class="fa fa-user" aria-hidden="true"></i>
     Submit
     </button>

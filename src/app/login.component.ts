@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import { Title } from '@angular/platform-browser';
 import { HomeComponent } from './home.component';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'login',
@@ -50,8 +50,8 @@ export class LoginComponent {
 
     //login form
     this.loginForm = formBuilder.group({
-      username: formBuilder.control(null),
-      password: formBuilder.control(null)
+      username: new FormControl("", Validators.required),
+      password: ["", Validators.required]
     });
   }
 
