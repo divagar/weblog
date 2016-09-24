@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       'Title': new FormControl("", Validators.required),
       'STitle': new FormControl("", Validators.required),
       'Author': new FormControl("", Validators.required),
-      'Content': new FormControl("", Validators.required)
+      'Content': new FormControl("")
     });
   }
 
@@ -134,19 +134,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.fbBlogDetails = this.af.database.object(query);
   }
 
-  addupdateBlog(blogFlag: boolean) {
+  addupdateBlog(blogFlag: boolean, dashboardFormVal) {
     var data: Object;
     var ckEditorContent = CKEDITOR.instances.ckEditor.getData();
     var date = new Date();
     var fDate = date.getDate() + ' ' + monthNames[date.getMonth()] + ' ' + date.getFullYear();
     data = {
-      'Title': this.dashboardForm.value.Title,
-      'STitle': this.dashboardForm.value.STitle,
-      'Author': this.dashboardForm.value.Author,
+      'Title': dashboardFormVal.Title,
+      'STitle': dashboardFormVal.STitle,
+      'Author': dashboardFormVal.Author,
       'Content': ckEditorContent,
       'PublishDate': fDate
     }
-    //console.log(this.dashboardForm.value);
     //console.log(data);
     var query: string = '/Blogs';
     console.log(query);
