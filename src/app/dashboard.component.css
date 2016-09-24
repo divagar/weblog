@@ -77,7 +77,7 @@ textarea {
 }
 /* dropdown submenu ends */
 
-.ng-valid[required], .ng-valid.required  {
+.ng-valid:not(form)  {
   border-left: 5px solid #42A948; /* green */
 }
 
