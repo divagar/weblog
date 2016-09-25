@@ -100,6 +100,15 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.editBlogFlag = false;
     this.fbBlogDetails = null;
 
+    //set dashboard form
+    const myDash = {
+      Title: '',
+      STitle: '',
+      Author: '',
+      Content: ''
+    };
+    this.setDashboardForm(myDash);
+
     //ckEditor cleanup
     if (CKEDITOR.instances.ckEditor != undefined) {
       CKEDITOR.instances.ckEditor.setData("");
@@ -132,6 +141,21 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     var query: string = '/Blogs/' + key;
     console.log(query);
     this.fbBlogDetails = this.af.database.object(query);
+    this.fbBlogDetails.subscribe(_fbBlogDetails => {
+      //set dashboard form
+      this.setDashboardForm(_fbBlogDetails);
+    });
+  }
+
+  setDashboardForm(data) {
+    const myDash = {
+      Title: data.Title,
+      STitle: data.STitle,
+      Author: data.Author,
+      Content: data.Content
+    };
+    (<FormGroup>this.dashboardForm)
+      .setValue(myDash, { onlySelf: true });
   }
 
   addupdateBlog(blogFlag: boolean, dashboardFormVal) {

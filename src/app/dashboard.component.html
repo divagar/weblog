@@ -47,17 +47,17 @@
         <div class="dashboardBlog" *ngIf="editBlogFlag || addNewBlogFlag">
           <div class="input-group">
             <span class="input-group-addon">Title</span>
-            <input type="text" class="form-control" #bTitle value="{{ (fbBlogDetails | async)?.Title }}" formControlName="Title">
+            <input type="text" class="form-control" #bTitle formControlName="Title">
           </div>
           <br/>
           <div class="input-group">
             <span class="input-group-addon">Short title</span>
-            <input type="text" class="form-control" #bSTitle value="{{ (fbBlogDetails | async)?.STitle }}" formControlName="STitle">
+            <input type="text" class="form-control" #bSTitle formControlName="STitle">
           </div>
           <br/>
           <div class="input-group">
             <span class="input-group-addon">Author</span>
-            <input type="text" class="form-control" #bAuthor value="{{ (fbBlogDetails | async)?.Author }}" formControlName="Author">
+            <input type="text" class="form-control" #bAuthor formControlName="Author">
           </div>
           <br/>
           <div class="input-group">
