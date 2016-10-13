@@ -4,6 +4,9 @@ import { Title, DomSanitizer } from '@angular/platform-browser';
 import { Routes, ActivatedRoute } from '@angular/router';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
+declare var hljs: any;
+declare var jQuery: any;
+
 @Component({
   selector: 'post',
   templateUrl: 'post.component.html',
@@ -21,7 +24,7 @@ export class PostComponent implements OnInit {
     private home: HomeComponent,
     private route: ActivatedRoute,
     private titleService: Title,
-    public sanitizer: DomSanitizer ) {
+    public sanitizer: DomSanitizer) {
 
     //Set page title
     this.titleService.setTitle(this.home.appTitle + " | " + this.pageTitle);
@@ -47,4 +50,9 @@ export class PostComponent implements OnInit {
     this.fbBlogDetails = this.af.database.object(query);
   }
 
+  codeHgl() {
+    jQuery('pre code').each(function (i, block) {
+      hljs.highlightBlock(block);
+    });
+  }
 }
