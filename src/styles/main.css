@@ -395,3 +395,13 @@ img::-moz-selection {
 body {
   -webkit-tap-highlight-color: #0085A1;
 }
+
+/* Highlight js */
+pre {
+    background-color: white !important;
+    border: none !important;
+}
+
+.hljs {
+    background-color: black !important;
+}
